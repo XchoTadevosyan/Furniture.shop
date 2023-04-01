@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="110" id="KGk-i7-Jjw" customClass="ItemOneTVC" customModule="Furniture_shop" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="336" height="110"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="336" height="110"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="list.bullet.rectangle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ZQA-bd-0iC">
+                        <rect key="frame" x="6" y="9.6666666666666643" width="108" height="91"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="94" id="kGZ-MD-mrP"/>
+                            <constraint firstAttribute="width" constant="108" id="nJ1-lq-01Q"/>
+                        </constraints>
+                        <variation key="heightClass=regular-widthClass=compact" image="folder.fill" catalog="system"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="20b-dF-NZB">
+                        <rect key="frame" x="122" y="8" width="204" height="94"/>
+                        <attributedString key="attributedText">
+                            <fragment content="Furniture.shop">
+                                <attributes>
+                                    <font key="NSFont" metaFont="systemBold" size="17"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                    <integer key="NSUnderline" value="1"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="20b-dF-NZB" secondAttribute="bottom" constant="8" id="9Kb-b0-qH5"/>
+                    <constraint firstItem="ZQA-bd-0iC" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="GfT-nA-u4f"/>
+                    <constraint firstItem="20b-dF-NZB" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="JPX-DH-2Dc"/>
+                    <constraint firstItem="20b-dF-NZB" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="VMh-QH-jlt"/>
+                    <constraint firstItem="20b-dF-NZB" firstAttribute="leading" secondItem="ZQA-bd-0iC" secondAttribute="trailing" constant="8" id="cht-1E-Hrh"/>
+                    <constraint firstAttribute="trailing" secondItem="20b-dF-NZB" secondAttribute="trailing" constant="10" id="dFX-yh-xKt"/>
+                    <constraint firstItem="ZQA-bd-0iC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="6" id="e2J-Cz-12r"/>
+                    <constraint firstItem="ZQA-bd-0iC" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="fyk-It-4ec"/>
+                    <constraint firstAttribute="bottom" secondItem="ZQA-bd-0iC" secondAttribute="bottom" constant="8" id="tGt-ww-eq6"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="myImage" destination="H2p-sc-9uM" id="TgG-o8-uLW"/>
+            </connections>
+            <point key="canvasLocation" x="42.748091603053432" y="42.95774647887324"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="folder.fill" catalog="system" width="128" height="96"/>
+        <image name="list.bullet.rectangle" catalog="system" width="128" height="93"/>
+    </resources>
+</document>
