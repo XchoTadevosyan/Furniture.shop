@@ -7,9 +7,6 @@
 
 import UIKit
 
-
-
-
 class BedTVC: UITableViewCell {
     
     var selectedImage: String?
@@ -21,26 +18,30 @@ class BedTVC: UITableViewCell {
     @IBOutlet weak var label1: UILabel!
     @IBOutlet weak var myImage: UIImageView!
 
-    
-//    var image = UIImage()
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         if let imageToLoad = selectedImage {
-            
             myImage.image  = UIImage(named: imageToLoad)
-            
         }
-//       myImage.image = image
+        
+        image()
         s()
-//        myImage.image = images
-//        secda()
     }
+    
+    func image() {
+        
+        myImage.layer.borderWidth = 2
+        myImage.layer.borderColor = #colorLiteral(red: 0.9686274529, green: 0.78039217, blue: 0.3450980484, alpha: 1)
+        myImage.layer.cornerRadius = 17
+        myImage.layer.masksToBounds = true
+        
+    }
+    
     func s() {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let nextVC = storyboard.instantiateViewController(withIdentifier: "BedKotegoriaVC") as! BedKotegoriaVC
-//        nextVC.image.text = text
         nextVC.buttonTU = { [weak self] text in
             self?.label1.text = text
             
@@ -48,9 +49,7 @@ class BedTVC: UITableViewCell {
             
     
     }
-        //    func secda() {
-        //        buttonTUS?(myImage.image!)
-        //    }
+
     override func setSelected(_ selected: Bool, animated: Bool) {
             super.setSelected(selected, animated: animated)
         }

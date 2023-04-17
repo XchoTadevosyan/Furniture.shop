@@ -28,6 +28,17 @@ class BedKotegoriaVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         images.image = image
+
+        imageDizayn()
+        
+    }
+    
+    func imageDizayn() {
+        
+        images.layer.shadowColor = UIColor.black.cgColor
+        images.layer.shadowOffset = CGSize(width: 5, height: 5)
+        images.layer.shadowOpacity = 1
+        images.layer.shadowRadius = 10
         
     }
     
@@ -44,6 +55,3 @@ class BedKotegoriaVC: UIViewController {
     }
 
 }
-//let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//let nextVC = storyboard.instantiateInitialViewController()(withIdentifier: "BedTVC") as! BedTVC
-//nextVC.images.image = image

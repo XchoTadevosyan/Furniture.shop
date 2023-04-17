@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct ImageItem {
+struct ImageItem: Equatable {
     
     var name: String
     let image: UIImage

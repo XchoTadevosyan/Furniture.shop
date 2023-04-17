@@ -14,7 +14,6 @@ import SwiftUI
 
 class ItemONEVC: UIViewController {
     
-    
     var selectidImage: String?
     var filteredShapes = [ImageItem]()
     var refreshControl = UIRefreshControl()
@@ -46,6 +45,7 @@ class ItemONEVC: UIViewController {
     
     
     func initSearchController()   {
+        
         searchController.loadViewIfNeeded()
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -70,6 +70,7 @@ class ItemONEVC: UIViewController {
     
     func fetchData() {
         DispatchQueue.main.async {
+            
             self.imageItems = []
             self.imageItems += CacheManager.shared.loadImages()
             self.imageItems += CacheMa.shared.loadImages()
@@ -79,17 +80,20 @@ class ItemONEVC: UIViewController {
             
             self.filteredData = self.imageItems
             self.tableView.reloadData()
+            
         }
     }
     
     
     func galBtn() {
+        
         var config = PHPickerConfiguration()
         config.filter = .images
         config.selectionLimit = 1
         let picker = PHPickerViewController(configuration: config)
         picker.delegate = self
         present(picker, animated: true)
+        
     }
     
     
@@ -100,6 +104,7 @@ class ItemONEVC: UIViewController {
         
         navigationController?.pushViewController(nextVC, animated: true)
     }
+    
     @IBAction func toTwoVC(_ sender: Any) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -107,6 +112,7 @@ class ItemONEVC: UIViewController {
         
         navigationController?.pushViewController(nextVC, animated: true)
     }
+    
     @IBAction func toThreeVC(_ sender: Any) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -114,6 +120,7 @@ class ItemONEVC: UIViewController {
         
         navigationController?.pushViewController(nextVC, animated: true)
     }
+    
     @IBAction func toOneVC(_ sender: Any) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -121,6 +128,7 @@ class ItemONEVC: UIViewController {
         
         navigationController?.pushViewController(nextVC, animated: true)
     }
+    
     @IBAction func showAction(_ sender: UIBarButtonItem) {
         
         let alert = UIAlertController(title: nil, message: "Options to add photo", preferredStyle: .actionSheet)
@@ -143,10 +151,9 @@ extension ItemONEVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-
         return filteredData.count
        
-                    }
+    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
@@ -173,11 +180,6 @@ extension ItemONEVC: UITableViewDataSource, UITableViewDelegate {
         
     }
     
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    }
-    
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let item = filteredData[indexPath.row]
@@ -187,26 +189,30 @@ extension ItemONEVC: UITableViewDataSource, UITableViewDelegate {
         
         nextVC.image = item.image
         
-        nextVC.buttonTU = { [self] text in
-            // TODO:
-            self.imageItems[indexPath.row].name = text
-          
-            CacheManager.shared.deleteImage(with: item.name)
-            CacheManager.shared.saveImage(id: text, image: item.image) { myimage in
-                
-                if myimage != nil {
+        nextVC.buttonTU = { text in
+            
+           
+            
+            let filt =  self.filteredData[indexPath.row]
+            if let index = self.imageItems.firstIndex(where: { $0 == filt }) {
+                self.imageItems[index].name = text
+                self.filteredData[indexPath.row].name = text
+                CacheManager.shared.deleteImage(with: item.name)
+                CacheManager.shared.saveImage(id: text, image: item.image) { myimage in
                     
-                    print("save")
-                    
-                } else {
-                    
-                    print("don't save")
-                    
+                    if myimage != nil {
+                        
+                        print("save")
+                        
+                    } else {
+                        
+                        print("don't save")
+                        
+                    }
                 }
+                
+                tableView.reloadData()
             }
-            
-            tableView.reloadData()
-            
         }
         
         navigationController?.pushViewController(nextVC, animated: true)
@@ -219,7 +225,6 @@ extension ItemONEVC: UITableViewDataSource, UITableViewDelegate {
             
             let item = filteredData[indexPath.row]
            
-            
             CacheManager.shared.deleteImage(with: item.name)
             CacheM.shared.deleteImage(with: item.name)
             CacheMa.shared.deleteImage(with: item.name)
@@ -237,35 +242,12 @@ extension ItemONEVC: UITableViewDataSource, UITableViewDelegate {
         return UISwipeActionsConfiguration(actions: [swipeRead])
         
     }
-    
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        filteredData = imageItems
-        let swipe = UIContextualAction(style: .normal, title: "Bay!") { [self] (action, view, succes) in
-            let item = imageItems[indexPath.row]
-            
-          
-            
-            CacheManager.shared.deleteImage(with: item.name)
-            CacheM.shared.deleteImage(with: item.name)
-            CacheMa.shared.deleteImage(with: item.name)
-            CacheMan.shared.deleteImage(with: item.name)
-            CacheMSofa.shared.deleteImage(with: item.name)
-            
-            fetchData()
-           
-        }
-        tableView.reloadData()
-        swipe.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
-        swipe.image = #imageLiteral(resourceName: "bb2aa6aa6f262271c2b155babed69b7d-removebg-preview-3")
-        
-        return UISwipeActionsConfiguration(actions: [swipe])
-        
-    }
 }
 
 extension ItemONEVC: PHPickerViewControllerDelegate {
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        
         picker.dismiss(animated: true, completion: .none)
         guard let result = results.last else { return }
         result.itemProvider.loadObject(ofClass: UIImage.self) { reading, error in
@@ -275,7 +257,6 @@ extension ItemONEVC: PHPickerViewControllerDelegate {
                 self.imageItems.append(item)
                 self.filteredData = imageItems
                 
-                //Home
                 CacheManager.shared.saveImage(id: item.name, image: item.image) { myimage in
                     if myimage != nil {
                         print("save")
@@ -291,34 +272,41 @@ extension ItemONEVC: PHPickerViewControllerDelegate {
 }
 
 //MARK: - extension - Search
+
 extension ItemONEVC:  UISearchResultsUpdating, UISearchBarDelegate  {
     
     //MARK: - UISearchController - func
+    
        func updateSearchResults(for searchController: UISearchController) {
            
            let searchBar = searchController.searchBar
            let scopeButton = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
            let searchText = searchBar.text!
+           
            filteredData = imageItems
+           
            filteredData = searchText.isEmpty ? imageItems : imageItems.filter { (item: ImageItem) -> Bool in
                  
                return item.name.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
-                  
                }
+           
            tableView.reloadData()
+           
            filterForSearchTextAndScopeButton(searchText: searchText, scopeButton: scopeButton)
 
        }
        
        func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-           print("searchBarCancelButtonClicked")
+           
            filteredData = imageItems
            
            tableView.reloadData()
        }
     
     //MARK: - All - func
+    
     func filterForSearchTextAndScopeButton(searchText: String, scopeButton : String = "All") {
+        
         filteredData = imageItems.filter
                 {
                     shape in

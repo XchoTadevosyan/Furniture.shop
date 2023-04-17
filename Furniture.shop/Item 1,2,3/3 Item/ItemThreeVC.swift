@@ -15,11 +15,17 @@ class ItemThreeVC: UIViewController, UISearchResultsUpdating {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationItem.largeTitleDisplayMode = .always
         
+        searchV()
+        
+    }
+    
+    func searchV() {
+        
         let search = UISearchController(searchResultsController: nil)
         search.searchResultsUpdater = self
         self.navigationItem.searchController = search
+        
     }
-    
     @IBAction func translationButton(_ sender: Any) {
         
         let alert = UIAlertController(title: nil, message: "Language", preferredStyle: .actionSheet)
